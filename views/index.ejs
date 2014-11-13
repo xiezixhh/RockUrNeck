@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>brief handle</title>
+<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/reveal.min.css">
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="/js/socket.io.js"></script>
+<script src="/lib/js/head.min.js"></script>
+<script src="/js/reveal.min.js"></script>
+<script src="/js/keymaster.js"></script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section data-markdown>
+            <script type="text/template">
+                ## Page 1
+
+                A paragraph with some text and a [link](http://hakim.se).
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                ## Page 2
+
+                A paragraph with some text and a [link](http://hakim.se).
+            </script>
+        </section>
+    </div>
+</div>
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        slideNumber: false,
+        history: false,
+        keyboard: true,
+        overview: true,
+        center: true,
+        touch: true,
+        loop: false,
+        rtl: false,
+        fragments: true,
+        embedded: false,
+        autoSlide: 0,
+        autoSlideStoppable: true,
+        mouseWheel: false,
+        hideAddressBar: true,
+        previewLinks: false,
+        viewDistance: 3,
+
+        dependencies: [
+
+            { src: '/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+            { src: '/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: '/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: '/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+            { src: '/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+            
+            { src: '/plugin/math/math.js', async: true }
+        ]
+    });
+
+    /* socket.io client */
+    var socket = io.connect('http://localhost:4000');
+        socket.on('news', function (data) {
+        console.log(data);
+        socket.emit('my other event', { my: 'data' });
+    });
+    /* END socket.io client */
+
+    /* keyboard event */
+    key('l', function() {
+        console.log('l')
+    })
+
+    key('r', function() {
+        console.log('r')
+    })
+    /* END keyboard event */
+
+
+})
+</script>
+</body>
+</html>
