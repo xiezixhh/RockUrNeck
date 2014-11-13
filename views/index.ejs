@@ -16,14 +16,33 @@
     <div class="slides">
         <section data-markdown>
             <script type="text/template">
-                ## Page 1
+                ## Left
 
                 A paragraph with some text and a [link](http://hakim.se).
             </script>
         </section>
+        <section>
+          <section data-markdown>
+            <script type="text/template">
+                ## Top
+
+                A paragraph with some text and a [link](http://hakim.se).
+            </script>
+          </section>
+
+          <section data-markdown>
+            <script type="text/template">
+                ## Bottom
+
+                A paragraph with some text and a [link](http://hakim.se).
+            </script>
+          </section>
+
+
+        </section>
         <section data-markdown>
             <script type="text/template">
-                ## Page 2
+                ## Right
 
                 A paragraph with some text and a [link](http://hakim.se).
             </script>
@@ -75,13 +94,12 @@ $(document).ready(function() {
     /* END socket.io client */
 
     /* keyboard event */
-    key('l', function() {
-        console.log('l')
-    })
+    key('left', function() { console.log('left') })
+    key('right', function() { console.log('right') })
+    key('up', function() { console.log('up') })
+    key('down', function() { console.log('down') })
 
-    key('r', function() {
-        console.log('r')
-    })
+
     /* END keyboard event */
 
 
