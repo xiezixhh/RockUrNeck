@@ -48,13 +48,67 @@ KeyboardInputManager.prototype.listen = function () {
     83: 2, // S
     65: 3  // A
   };
-
+var state = 4;
+	document.addEventListener("facetrackingEvent", function( event ) {
+		// clear canvas
+		var ienum = document.getElementById('ienum');
+		var irealtime= document.getElementById('realtime');
+		irealtime.innerHTML = event.x+" "+event.y+" "+event.height+" "+event.angle;
+		if(!init)
+		{
+			if(event.height>175)
+			{
+				ienum.innerHTML = "please farer";
+				return ;						
+			}
+			else if(event.height<155)
+			{
+				ienum.innerHTML = "please closer";
+				return ;
+			}
+			else
+			{
+				init = true;
+				globaly = event.height;
+			}
+		}
+		else
+		{
+			//irealtime.innerHTML = globalx;
+			overlayContext.clearRect(0,0,320,240);
+			// once we have stable tracking, draw rectangle
+			if (event.detection == "CS") {
+				
+			}
+			if(event.angle > 1.8 && event.height > 150)
+			{
+				ienum.innerHTML = "left";
+				self.emit("move", 3);
+			}
+			else if(event.angle < 1.3 && event.height > 150)
+			{
+				ienum.innerHTML = "right";
+				self.emit("move" , 1);
+			}
+			else if(event.height > 180 && event.angle < 1.65 && event.angle > 1.45)
+			{
+				ienum.innerHTML = "up";
+				self.emit("move" , 0);
+			}
+			else if(event.height < 115)
+			{
+				self.emit("move" , 0);
+				ienum.innerHTML = "down";
+			}
+			else
+				ienum.innerHTML = "central";
+		}
+	});
   // Respond to direction keys
   document.addEventListener("keydown", function (event) {
     var modifiers = event.altKey || event.ctrlKey || event.metaKey ||
                     event.shiftKey;
     var mapped    = map[event.which];
-
     if (!modifiers) {
       if (mapped !== undefined) {
         event.preventDefault();
