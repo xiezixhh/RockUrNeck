@@ -3,12 +3,31 @@
 <head>
 <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
 <script src="/jquery.min.js"></script>
-<script src="/popup.js"></script>
 <!-- <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> -->
+<script src="/popup.js"></script>
+<script src="/chart.min.js"></script>
+<style type="text/css">
+html {
+    position: relative;
+    width: 300px;
+    height: 400px;
+}
+</style>
 </head>
 <body>
-<button class="btn btn-primary">post</button>
-<!-- <textarea id="text"></textarea> -->
+<div class="container text-center">
+    <h2>Neck Care<small> recent data</small></h2>
+    <div class="row">
+        <h3><small>recent game result</small></h3>
+        <canvas id="playsteps" width="270" height="100"></canvas>
+        <h3><small>recent view webs</small></h3>
+        <canvas id="webpages" width="270" height="100"></canvas>
+        <h3><small>recent max neck angles</small></h3>
+        <canvas id="neckMaxAngle" width="270" height="100"></canvas>
+
+    </div>
+</div>
+
 
 </body>
 </html>

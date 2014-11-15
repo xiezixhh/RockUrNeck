@@ -1,5 +1,5 @@
 module.exports = {
-	cookieSecret: 'neckcaredatabase',
-	db:'neckcare',
-	host:'localhost',
+    cookieSecret: 'neckcare',
+    db: 'neckcare',
+    host: 'localhost',
 };

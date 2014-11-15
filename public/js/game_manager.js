@@ -28,7 +28,11 @@ GameManager.prototype.keepPlaying = function () {
 
 // Return true if the game is lost, or has won and the user hasn't kept playing
 GameManager.prototype.isGameTerminated = function () {
-  return this.over || (this.won && !this.keepPlaying);
+  if (this.over || (this.won && !this.keepPlaying)) {
+    return true;
+  } else {
+    return false;
+  }
 };
 
 // Set up the game
@@ -167,7 +171,12 @@ GameManager.prototype.move = function (direction) {
           self.score += merged.value;
 
           // The mighty 2048 tile
-          if (merged.value === 16) self.won = true;
+          if (merged.value === 16) 
+		  {
+			self.won = true;
+			var endDate = new Date();
+			endtime = endDate.getTime();
+		}
         } else {
           self.moveTile(tile, positions.farthest);
         }

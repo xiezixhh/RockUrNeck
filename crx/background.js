@@ -5,6 +5,19 @@ function postDate() {
 
 }
 
+function openRelaxTab() {
+    chrome.tabs.create(
+        {
+            url: 'http://localhost:3000/relax'
+        },
+        function(tab) { 
+            console.log ('open')
+        }
+    )
+}
+
 $(document).ready(function() {
-    setInterval( postDate, 2000 )
+    setInterval( postDate, 8000 )
+
 })
+
