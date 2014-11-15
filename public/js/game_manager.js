@@ -176,6 +176,11 @@ GameManager.prototype.move = function (direction) {
 			self.won = true;
 			var endDate = new Date();
 			endtime = endDate.getTime();
+			userdata = {
+			  totaltime : (endtime-starttime)/1000 ,
+			  step : steptime ,
+			  maxangle : maxangle*180/3.14
+			 };
 		}
         } else {
           self.moveTile(tile, positions.farthest);
