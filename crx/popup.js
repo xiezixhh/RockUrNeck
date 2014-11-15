@@ -1,4 +1,8 @@
 $(document).ready(function(){
+    $.post('http://localhost:3000/visual', function(ret) {
+        
+    })
+
 
     var webctx = $("#webpages").get(0).getContext("2d");
     var playctx = $("#playsteps").get(0).getContext("2d");
@@ -14,26 +18,13 @@ $(document).ready(function(){
                 pointStrokeColor : "#fff",
                 data : [8,64,27,99,51,42,16]
             },
-            // {
-            //     fillColor : "rgba(0,255,255,0.5)",
-            //     strokeColor : "rgba(0, 255, 153,1)",
-            //     pointColor : "rgba(0, 255, 255,1)",
-            //     pointStrokeColor : "#fff",
-            //     data : [26,33,96,28,48,27,11]
-            // }
         ]
     }
 
     var neckAngleData = {
         labels : ["1","2","3","4","5","6","7"],
         datasets : [
-            // {
-            //     fillColor : "rgba(220,220,220,0.5)",
-            //     strokeColor : "rgba(220,220,220,1)",
-            //     pointColor : "rgba(220,220,220,1)",
-            //     pointStrokeColor : "#fff",
-            //     data : [65,59,90,81,56,55,40]
-            // },
+
             {
                 fillColor : "rgba(151,187,205,0.5)",
                 strokeColor : "rgba(151,187,205,1)",
