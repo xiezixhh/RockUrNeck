@@ -177,7 +177,7 @@ GameManager.prototype.move = function (direction) {
 			var endDate = new Date();
 			endtime = endDate.getTime();
 			userdata = {
-			  totaltime : endtime-starttime ,
+			  totaltime : (endtime-starttime)/1000 ,
 			  step : steptime ,
 			  maxangle : maxangle*180/3.14
 			 };
