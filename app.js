@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var session = require('express-session');
 var routes = require('./routes/index');
 
 
@@ -12,17 +12,17 @@ var app = express()
 
 
 /* socket.io server */
-var server = require('http').Server(app).listen(4000);
-var io = require('socket.io').listen(server)
+// var server = require('http').Server(app).listen(4000);
+// var io = require('socket.io').listen(server)
 
 
-io.sockets.on('connection', function(socket) {
-    socket.emit('news', { status: 200 })
+// io.sockets.on('connection', function(socket) {
+//     socket.emit('news', { status: 200 })
     
-    socket.on('my other event', function(data) {
-        console.log(data)
-    });
-});
+//     socket.on('my other event', function(data) {
+//         console.log(data)
+//     });
+// });
 
 /* END soceket.io server */
 
@@ -47,6 +47,14 @@ app.use(function(req, res, next) {
     err.status = 404;
     next(err);
 });
+
+app.use(session({
+    secret: setting.cookieSecret,
+    cookie: { maxAge: 24*60*60*1000 },
+    resave: true,
+    saveUninitialized: true
+
+}));
 
 // error handlers
 

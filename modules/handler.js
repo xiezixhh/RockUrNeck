@@ -1,19 +1,23 @@
+var setting = require('../setting')
 var mongodb = require('./db')
 var MongoClient = require('mongodb').MongoClient
 
-function Handler(){
+function User(name) {
+	this.name = name
+}
+
+function Handler() {
 
 }
 
-module.exports = Handler
 
-Handler.createCollection = function createCollection(callback){
-	MongoClient.connect("mongodb://localhost:27017/neckcare", {native_parser:true}, function (err, db){
+Handler.createCollection = function (callback){
+	MongoClient.connect(setting.url, {native_parser:true}, function (err, db){
 		if(err){
 			mongodb.close()
 			return callback(err, null);
 		}
-		db.createCollection('Records', function (err, collection){
+		db.createCollection('records', function (err, collection){
 			if (err){
 				db.close()
 				return callback(err, null)
@@ -43,13 +47,13 @@ Handler.createCollection = function createCollection(callback){
 	})
 }
 
-Handler.insertRecord = function insertRecord(newRecord, callback){
-	MongoClient.connect("mongodb://localhost:27017/neckcare", {native_parser:true}, function (err, db){
+Handler.insertRecord = function (newRecord, callback){
+	MongoClient.connect(setting.url, {native_parser:true}, function (err, db){
 		if(err){
 			mongodb.close()
 			return callback(err, null);
 		}
-		db.collection('Records',{strict:true}, function (err, collection){
+		db.collection('records',{strict:true}, function (err, collection){
 			if (err){
 				db.close()
 				return callback(err, null)
@@ -67,3 +71,5 @@ Handler.insertRecord = function insertRecord(newRecord, callback){
 		})
 	})	
 }
+
+module.exports = Handler
