@@ -2,7 +2,7 @@
 var debug = require('debug')('BriefHandleServer');
 var app = require('../app');
 
-app.set('port', 80)// process.env.PORT || 80);
+app.set('port', process.env.PORT || 3000);
 
 
 var server = app.listen(app.get('port'), function() {
