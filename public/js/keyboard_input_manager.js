@@ -49,8 +49,13 @@ KeyboardInputManager.prototype.listen = function () {
     65: 3  // A
   };
 var state = 4;
+var time = 10;
 	document.addEventListener("facetrackingEvent", function( event ) {
 		// clear canvas
+		time--;
+		if(time != 0)
+			return ;
+		time = 10;
 		var ienum = document.getElementById('ienum');
 		var irealtime= document.getElementById('realtime');
 		irealtime.innerHTML = event.x+" "+event.y+" "+event.height+" "+event.angle;
@@ -90,14 +95,14 @@ var state = 4;
 				ienum.innerHTML = "right";
 				self.emit("move" , 1);
 			}
-			else if(event.height > 180 && event.angle < 1.65 && event.angle > 1.45)
+			else if(event.height > 155 && event.angle < 1.65 && event.angle > 1.45)
 			{
 				ienum.innerHTML = "up";
 				self.emit("move" , 0);
 			}
 			else if(event.height < 115)
 			{
-				self.emit("move" , 0);
+				self.emit("move" , 2);
 				ienum.innerHTML = "down";
 			}
 			else
