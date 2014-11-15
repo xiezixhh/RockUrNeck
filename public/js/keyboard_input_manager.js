@@ -59,6 +59,10 @@ var time = 10;
 		var ienum = document.getElementById('ienum');
 		var irealtime= document.getElementById('realtime');
 		irealtime.innerHTML = event.x+" "+event.y+" "+event.height+" "+event.angle;
+		if(event.angle - 1.57 > maxangle)
+			maxangle = event.angle-1.57;
+		else if(1.57 - event.angle > maxangle)
+			maxangle = 1.57 - event.angle;
 		if(!init)
 		{
 			if(event.height>175)
@@ -89,21 +93,25 @@ var time = 10;
 			{
 				ienum.innerHTML = "left";
 				self.emit("move", 3);
+				steptime++;
 			}
 			else if(event.angle < 1.3 && event.height > 150)
 			{
 				ienum.innerHTML = "right";
 				self.emit("move" , 1);
+				steptime++;
 			}
 			else if(event.height > 155 && event.angle < 1.65 && event.angle > 1.45)
 			{
 				ienum.innerHTML = "up";
 				self.emit("move" , 0);
+				steptime++;
 			}
 			else if(event.height < 115)
 			{
 				self.emit("move" , 2);
 				ienum.innerHTML = "down";
+				steptime++;
 			}
 			else
 				ienum.innerHTML = "central";
