@@ -11,4 +11,8 @@ router.post('/', function(req, res) {
     res.send(new Date())
 })
 
+router.get('/relax', function(req, res) {
+    res.render('control')
+})
+
 module.exports = router;
