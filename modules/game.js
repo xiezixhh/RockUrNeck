@@ -46,7 +46,7 @@ Game.query =  function (callback){
                 return callback(err, null)
             }
             collection.find({}, function (err, games){
-                if(!webps){
+                if(!games){
                     return callback(null, null)
                 }
                 games.toArray(function (err, gameArray){

@@ -58,9 +58,9 @@ router.post('/game', function(req, res) {
 })
 
 router.post('/visual', function(req, res) {
-    var gamedata, webdata;
+    //var gamedata, webdata;
     /* query game data */ 
-    Game.query(function(err, data) {
+    Game.query(function(err, gamedata) {
         if (err) {
             console.log('query all error')
             return res.send('query all error')
@@ -76,8 +76,9 @@ router.post('/visual', function(req, res) {
             for (i = 0; i < webdata.length; i++) {
                 sum += webdata[i].freq
             }
+            // console.log('sum',sum)
             for (var i = 0; i < webdata.length; i++) {
-                webdata.freq = webdata.freq * 1.0 / sum
+                webdata.freq = webdata.freq// * 1.0 / sum
             }
             var all = {
                 web: webdata,

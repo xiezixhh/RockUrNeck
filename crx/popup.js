@@ -3,14 +3,20 @@ $(document).ready(function(){
         steps = [],
         webpage = []
     var gamedata;
-    $.post('http://localhost:3000/visual', {}, function(ret) {
+$.post('http://localhost:3000/visual', {}, function(ret) {
         console.log(ret)
         if (ret != null) {
-            gamedata = ret.gamedata,
-            webpage = ret.webdata
+            gamedata = ret.game
+            for (var i = 0; i < gamedata.length; i++) {
+                steps.push(gamedata[i].step)
+                maxAngles.push( parseInt(gamedata[i].maxAngle) )
+            }
+            // console.log(maxAngles)
+            for (var i = 0; i < ret.web.length; i++) {
+                webpage.push(ret.web[i].freq)
+            }
+            console.log(webpage)
         }
-        
-    })
 
 
     var webctx = $("#webpages").get(0).getContext("2d");
@@ -25,13 +31,13 @@ $(document).ready(function(){
                 strokeColor : "rgba(204, 153, 0,1)",
                 pointColor : "rgba(208 ,133, 4,1)",
                 pointStrokeColor : "#fff",
-                data : gamedata.step//[8,64,27,99,51,42,16]
+                data : steps//[8,64,27,99,51,42,16]
             },
         ]
     }
-
+    // console.log(maxAngles)
     var neckAngleData = {
-        labels : ["1","2","3","4","5","6","7"],
+        labels : ["1","2","3","4","5","6","7","8"],
         datasets : [
 
             {
@@ -39,7 +45,7 @@ $(document).ready(function(){
                 strokeColor : "rgba(151,187,205,1)",
                 pointColor : "rgba(151,187,205,1)",
                 pointStrokeColor : "#fff",
-                data : gamedata.maxAngle //[28,48,40,19,96,27,100]
+                data : maxAngles //[28,48,40,19,96,27,100]
             }
         ]
     }
@@ -62,13 +68,15 @@ $(document).ready(function(){
         }
     ]
 
-    for (var i = 0; i < webPageData.length; i++)
-        webPageData[i].value = val.freq
+    for (var i = 0; i < webPageData.length; i++) {
+        webPageData[i].value = webpage[i]//.freq
+    }
     
 
     new Chart(webctx).Doughnut(webPageData)
     new Chart(playctx).Line(playData)
     new Chart(neckctx).Bar(neckAngleData)
+    })
 
 })
     

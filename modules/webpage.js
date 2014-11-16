@@ -123,4 +123,4 @@ WebPage.query =  function (callback){
     })
 }
 
-modules.exports = WebPage
+module.exports = WebPage;
