@@ -171,17 +171,19 @@ GameManager.prototype.move = function (direction) {
           self.score += merged.value;
 
           // The mighty 2048 tile
-          if (merged.value === 16) 
-		  {
-			self.won = true;
-			var endDate = new Date();
-			endtime = endDate.getTime();
-			userdata = {
-			  totaltime : (endtime-starttime)/1000 ,
-			  step : steptime ,
-			  maxangle : maxangle*180/3.14
-			 };
-		}
+          if (merged.value === 16) {
+            self.won = true;
+            var endDate = new Date();
+            endtime = endDate.getTime();
+            userdata = {
+                maxAngle : maxangle*180/3.14,
+                step : steptime ,
+                duration : (endtime-starttime)/1000
+            };
+            $.post('/visual', userdata, function(ret) {
+              console.log('success')
+            })
+          }
         } else {
           self.moveTile(tile, positions.farthest);
         }

@@ -8,7 +8,7 @@ router.get('/', function(req, res) {
 
 router.post('/', function(req, res) {
     console.log(req.body)
-    res.send(new Date())
+    return res.send(new Date())
 })
 
 router.get('/relax', function(req, res) {
@@ -20,7 +20,8 @@ router.post('/game', function(req, res) {
 })
 
 router.post('/visual', function(req, res) {
-
+    console.log(req.body)
+    return res.send('success')
 })
 
 module.exports = router;

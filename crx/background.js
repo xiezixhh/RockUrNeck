@@ -16,8 +16,18 @@ function openRelaxTab() {
     )
 }
 
-$(document).ready(function() {
-    setInterval( postDate, 8000 )
 
+function getCurrentTab() {
+    chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
+      var urls = tabs[0].url.split('\/')
+      var url = urls[0] + '//' + urls[2]
+      console.log(url);
+
+    });
+}
+
+$(document).ready(function() {
+    // setInterval( postDate, 8000 )
+    setInterval(getCurrentTab, 3000)
 })
 

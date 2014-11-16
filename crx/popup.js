@@ -1,7 +1,7 @@
 $(document).ready(function(){
-    $.post('http://localhost:3000/visual', function(ret) {
+    // $.post('http://localhost:3000/visual', function(ret) {
         
-    })
+    // })
 
 
     var webctx = $("#webpages").get(0).getContext("2d");
