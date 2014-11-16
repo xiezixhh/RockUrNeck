@@ -21,14 +21,23 @@ WebPage.save = function (host, cb) {
                 mongodb.close()
                 return cb(err)
             }
-            collection.insert(web, {safe:true}, function(err, result) {
-                if (err) {
-                    mongodb.close()
-                    return cb(err)
-                }
-                mongodb.close()
-                return cb(null, result[0])
+            collection.findOne({host:host}, function (err, result){
+            	if (err){
+            		db.close()
+            		return 	callback (err, null)
+            	}
+            	if (!result){
+            	collection.insert(web, {safe:true}, function(err, result) {
+	                if (err) {
+	                    mongodb.close()
+	                    return cb(err)
+	                }
+	                mongodb.close()
+	                return cb(null, result[0])
+	            })
+            }
             })
+            
         })
     })
 }
