@@ -76,7 +76,7 @@ router.post('/visual', function(req, res) {
             for (i = 0; i < webdata.length; i++) {
                 sum += webdata[i].freq
             }
-            for (int i = 0; i < webdata.length; i++) {
+            for (var i = 0; i < webdata.length; i++) {
                 webdata.freq = webdata.freq * 1.0 / sum
             }
             var all = {

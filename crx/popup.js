@@ -2,11 +2,12 @@ $(document).ready(function(){
     var maxAngles = [],
         steps = [],
         webpage = []
-    var data = {}
+    var gamedata;
     $.post('http://localhost:3000/visual', {}, function(ret) {
         console.log(ret)
         if (ret != null) {
-            data = ret
+            gamedata = ret.gamedata,
+            webpage = ret.webdata
         }
         
     })
@@ -24,7 +25,7 @@ $(document).ready(function(){
                 strokeColor : "rgba(204, 153, 0,1)",
                 pointColor : "rgba(208 ,133, 4,1)",
                 pointStrokeColor : "#fff",
-                data : data.step//[8,64,27,99,51,42,16]
+                data : gamedata.step//[8,64,27,99,51,42,16]
             },
         ]
     }
@@ -38,38 +39,32 @@ $(document).ready(function(){
                 strokeColor : "rgba(151,187,205,1)",
                 pointColor : "rgba(151,187,205,1)",
                 pointStrokeColor : "#fff",
-                data : data.maxAngle //[28,48,40,19,96,27,100]
+                data : gamedata.maxAngle //[28,48,40,19,96,27,100]
             }
         ]
     }
 
-    var webPageData = [
-        {
+    var webPageData = [{
             value: 30,
             color:"#F7464A"
-        },
-        {
+        },{
             value : 50,
             color : "#E2EAE9"
-        },
-        {
+        },{
             value : 100,
             color : "#D4CCC5"
-        },
-        {
+        },{
             value : 40,
             color : "#949FB1"
-        },
-        {
+        },{
             value : 120,
             color : "#4D5360"
         }
-
     ]
 
-    data.webPageData.forEach(function(index, val) {
-        webPageData[index].value = val.freq
-    })
+    for (var i = 0; i < webPageData.length; i++)
+        webPageData[i].value = val.freq
+    
 
     new Chart(webctx).Doughnut(webPageData)
     new Chart(playctx).Line(playData)
