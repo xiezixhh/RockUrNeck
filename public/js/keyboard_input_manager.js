@@ -89,13 +89,13 @@ var time = 10;
 			if (event.detection == "CS") {
 				
 			}
-			if(event.angle > 1.8 && event.height > 150)
+			if(event.angle > 1.7 && event.height > 150)
 			{
 				ienum.innerHTML = "left";
 				self.emit("move", 3);
 				steptime++;
 			}
-			else if(event.angle < 1.3 && event.height > 150)
+			else if(event.angle < 1.35 && event.height > 150)
 			{
 				ienum.innerHTML = "right";
 				self.emit("move" , 1);
