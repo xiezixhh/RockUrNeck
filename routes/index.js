@@ -7,9 +7,7 @@ var Game = require('../modules/game')
 var lasturl = null
 
 /* GET home page. */
-router.get('/', function(req, res) {
-  res.render('index', { title: 'Express' });
-});
+
 
 router.post('/', function(req, res) {
     // console.log(req.body)
