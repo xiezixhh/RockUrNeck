@@ -33,8 +33,8 @@ function getCurrentTab() {
 $(document).ready(function() {
     // var d = new Date().getTime() / 1000.0
 
-    setInterval( postDate, 3000 )
-    setInterval( openRelaxTab, 10000000000 )
-    setInterval( getCurrentTab, 3000 )
+    setInterval( postDate, 3*1000 )
+    setInterval( openRelaxTab, 2*60*1000 )
+    setInterval( getCurrentTab, 3*1000 )
 })
 
