@@ -2,10 +2,11 @@ $(document).ready(function(){
     var maxAngles = [],
         steps = [],
         webpage = []
-    $.post('http://localhost:3000/visual', {}, function(data) {
-        console.log(data)
-        if (data != null) {
-
+    var data = {}
+    $.post('http://localhost:3000/visual', {}, function(ret) {
+        console.log(ret)
+        if (ret != null) {
+            data = ret
         }
         
     })
@@ -37,7 +38,7 @@ $(document).ready(function(){
                 strokeColor : "rgba(151,187,205,1)",
                 pointColor : "rgba(151,187,205,1)",
                 pointStrokeColor : "#fff",
-                data : data.maxAngle[28,48,40,19,96,27,100]
+                data : data.maxAngle //[28,48,40,19,96,27,100]
             }
         ]
     }
@@ -65,6 +66,11 @@ $(document).ready(function(){
         }
 
     ]
+
+    data.webPageData.forEach(function(index, val) {
+        webPageData[index].value = val.freq
+    })
+
     new Chart(webctx).Doughnut(webPageData)
     new Chart(playctx).Line(playData)
     new Chart(neckctx).Bar(neckAngleData)
