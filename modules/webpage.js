@@ -5,7 +5,7 @@ var MongoClient = require('mongodb').MongoClient
 function WebPage(host) {
     this.host = host
     this.freq = 0
-    this.date = []
+    this.date = new Date()
 }
 
 
@@ -33,7 +33,7 @@ WebPage.save = function (host, cb) {
     })
 }
 
-WebPage.query =  function (callback){
+WebPage.updateLast =  function (host, callback){
     MongoClient.connect(setting.url, {native_parser:true}, function (err,db){
         if (err){
             mongodb.close()
@@ -44,7 +44,30 @@ WebPage.query =  function (callback){
                 db.close()
                 return callback(err, null)
             }
-            collection.find({}, function (err, webps){
+            collection.update({host:host}, {$inc : {freq:1}}, function (err, count){
+                if(err){
+                	db.close()
+                    return callback(err, null)
+                }
+                db.close()
+                return callback(null, count)                
+            })
+        })
+    })
+}
+
+WebPage.query =  function (host, callback){
+    MongoClient.connect(setting.url, {native_parser:true}, function (err,db){
+        if (err){
+            mongodb.close()
+            return cb(err)
+        }
+        db.collection('webp', function(err, collection){
+            if(err){
+                db.close()
+                return callback(err, null)
+            }
+            collection.find({host:host}, function (err, webps){
                 if(!webps){
                     return callback(null, null)
                 }
