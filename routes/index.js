@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
+var WebPage = require('../modules/webpage')
+var Game = require('../modules/game')
+
 var lasturl = null
 
 /* GET home page. */
@@ -12,7 +15,14 @@ router.post('/', function(req, res) {
     // console.log(req.body)
     var data = req.body
     if (lasturl != data.url) {
-
+        WebPage.save(data.url, function(err, doc) {
+            if (err) {
+                console.log('save url error')
+                return res.send('error')
+            }
+            console.log('ok')
+            return res.send('save url')
+        })
         // insert both lasturl and new url
         // after that
         lasturl = data.url
@@ -23,17 +33,27 @@ router.post('/', function(req, res) {
     // return res.send(new Date())
 })
 
-router.get('/relax', function(req, res) {
+router.get('/', function(req, res) {
     res.render('control')
 })
 
 router.post('/game', function(req, res) {
-
+    var data = req.body
+    Game.save(data.maxAngle, data.step, data.duration, 
+        function(err, doc) {
+            if (err) {
+                console.log('error')
+                return res.send('error')
+            }
+            console.log("save")
+            return res.send('save')
+    })
 })
 
 router.post('/visual', function(req, res) {
     var gamedata, webdata;
     /* query game data */ 
+    Game.
     gamedata = gamedata.slice(0, 8)
     /* query web set data */ 
     var sum = 0;
