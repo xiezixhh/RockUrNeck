@@ -4,7 +4,7 @@ module.exports = {
     host: 'localhost',
     url: 'mongodb://localhost:27017/neckcare',
     collections: {
-        record: 'record',
+        webpage: 'webp',
         game: 'game',
     }
 };
