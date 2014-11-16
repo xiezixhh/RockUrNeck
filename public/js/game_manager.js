@@ -180,7 +180,7 @@ GameManager.prototype.move = function (direction) {
                 step : steptime ,
                 duration : (endtime-starttime)/1000
             };
-            $.post('/visual', userdata, function(ret) {
+            $.post('/game', userdata, function(ret) {
               console.log('success')
             })
           }

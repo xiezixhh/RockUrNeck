@@ -1,7 +1,14 @@
 $(document).ready(function(){
-    // $.post('http://localhost:3000/visual', function(ret) {
+    var maxAngles = [],
+        steps = [],
+        webpage = []
+    $.post('http://localhost:3000/visual', {}, function(data) {
+        console.log(data)
+        if (data != null) {
+
+        }
         
-    // })
+    })
 
 
     var webctx = $("#webpages").get(0).getContext("2d");
@@ -16,7 +23,7 @@ $(document).ready(function(){
                 strokeColor : "rgba(204, 153, 0,1)",
                 pointColor : "rgba(208 ,133, 4,1)",
                 pointStrokeColor : "#fff",
-                data : [8,64,27,99,51,42,16]
+                data : data.step//[8,64,27,99,51,42,16]
             },
         ]
     }
@@ -30,7 +37,7 @@ $(document).ready(function(){
                 strokeColor : "rgba(151,187,205,1)",
                 pointColor : "rgba(151,187,205,1)",
                 pointStrokeColor : "#fff",
-                data : [28,48,40,19,96,27,100]
+                data : data.maxAngle[28,48,40,19,96,27,100]
             }
         ]
     }

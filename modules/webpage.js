@@ -94,4 +94,33 @@ WebPage.query =  function (host, callback){
     })
 }
 
+WebPage.query =  function (callback){
+    MongoClient.connect(setting.url, {native_parser:true}, function (err,db){
+        if (err){
+            mongodb.close()
+            return cb(err)
+        }
+        db.collection('webp', function(err, collection){
+            if(err){
+                db.close()
+                return callback(err, null)
+            }
+            collection.find({}, function (err, docs){
+                if(!docs){
+                    return callback(null, null)
+                }
+                docs.toArray(function (err, data){
+                    if (err){
+                        db.close()
+                        return callback(err, null)
+                    }else{
+                        db.close()
+                        return callback(null, data)
+                    }
+                })
+            })
+        })
+    })
+}
+
 modules.exports = WebPage

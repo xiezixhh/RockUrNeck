@@ -66,20 +66,26 @@ router.post('/visual', function(req, res) {
             return res.send('query all error')
         }
         gamedata = gamedata.slice(0, 8)
-        /* query web set data */ 
-        var sum = 0;
-        for (i = 0; i < webdata.length; i++) {
-            sum += webdata[i].freq
-        }
-        for (int i = 0; i < webdata.length; i++) {
-            webdata.freq = webdata.freq * 1.0 / sum
-        }
-        var all = {
-            web: webdata,
-            game: gamedata
-        }
-        console.log('query all success')
-        return res.send(all)
+        /* query web set data */
+        WebPage.query(function(err, webdata) {
+            if (err) {
+                console.log(err)
+                return res.send('webdata query error')
+            }
+            var sum = 0;
+            for (i = 0; i < webdata.length; i++) {
+                sum += webdata[i].freq
+            }
+            for (int i = 0; i < webdata.length; i++) {
+                webdata.freq = webdata.freq * 1.0 / sum
+            }
+            var all = {
+                web: webdata,
+                game: gamedata
+            }
+            console.log('query all success')
+            return res.send(all)
+        })
     })
 
     // return res.send('success')
