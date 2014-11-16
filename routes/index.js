@@ -15,4 +15,12 @@ router.get('/relax', function(req, res) {
     res.render('control')
 })
 
+router.post('/game', function(req, res) {
+
+})
+
+router.post('/visual', function(req, res) {
+
+})
+
 module.exports = router;
